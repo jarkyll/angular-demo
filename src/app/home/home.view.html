@@ -1,7 +1,41 @@
-<span ng-bind="vm.greeting"></span>
+<div class="menu">
+	<div class="menu-label">To-do List</div>
+	<ul ng-repeat="todo in vm.items track by $index">
+		<li class="menu-list">
+			<a ng-click="vm.openModal(todo, $index)">{{ todo }}</a>
+		</li>
+	</ul>
+</div>
+<div class="field">
+    <div class="control">
+		<input class="input" placeholder="Item to add" ng-model="vm.addItem" ng-keypress="vm.addTodo($event)">
+    </div>
+    
+    <div class="control">
+        <button class="button" ng-click="vm.addTodo()">Add Item</button>
+    </div>
+</div>
 
-<button ng-click="vm.showSampleConstant()">{{ 'home.button' | translate }}</button>
+<div class="field">
+	<div class="control">
+		<button class="button" ng-click="vm.get()">Get</button>
+	</div>
+</div>
 
-<button ng-click="vm.switchLanguage('en')">In English</button>
-
-<button ng-click="vm.switchLanguage('ru')">По-русски</button>
+ 
+<div class="modal" ng-class="{'is-active': vm.showModal}">
+	<div class="modal-background">	
+	</div>	
+	
+	<div class="modal-content">
+		<div class="card">
+			<div class="card-content">
+				<div class="content">
+					Do you want to remove {{ vm.deleteItem }} from the list?
+					<button class="button" ng-click="vm.deleteTodo()"> Yes </button>
+					<button class="button">	No </button>		
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
