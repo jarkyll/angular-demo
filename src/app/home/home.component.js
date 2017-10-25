@@ -10,7 +10,7 @@
   });
 
   /** @ngInject */
-  function HomeController($log, $translate, $http, SAMPLE_CONSTANT) {
+  function HomeController($http, $window) {
     var vm = this;
 		vm.addItem = '';
 		vm.deleteItem = '';
@@ -21,23 +21,15 @@
 
 		const API_KEY = '5c0e993c6bbf489aa26a01c559defd36'
 
-    vm.showSampleConstant = showSampleConstant;
-    vm.switchLanguage = switchLanguage;
     vm.alertUser = alertUser;
     vm.addTodo = addTodo;
 		vm.openModal = openModal;
 		vm.closeModal = closeModal;
-		vm.deleteTodo = deleteTodo
+		vm.deleteTodo = deleteTodo;
+		
+
 		vm.get = get;
-	
-
-    function showSampleConstant() {
-      alert(SAMPLE_CONSTANT);
-    }
-
-    function switchLanguage(language) {
-      $translate.use(language);
-    }
+		vm.openArticle = openArticle;		
 
     function alertUser() {
       alert('This is the alert');
@@ -50,34 +42,38 @@
 	 	 }
     }
 
-	function openModal(item, index) {
-		vm.showModal = true;		
-		vm.deleteItem = item;
-		vm.deleteIndex = index;
-	}
+		function openModal(item, index) {
+			vm.showModal = true;		
+			vm.deleteItem = item;
+			vm.deleteIndex = index;
+		}
 	
-	function closeModal () {
-	  vm.deleteItem = null;
-	  vm.deleteIndex = null;
-	  vm.showModal = false;	
-	}
+		function closeModal () {
+			vm.deleteItem = null;
+			vm.deleteIndex = null;
+			vm.showModal = false;	
+		}
 
-  function editTodo(item, index) {
-    vm.items[index] = item
-  }
+		function editTodo(item, index) {
+		  vm.items[index] = item
+		}
 
-  function deleteTodo() {
-    vm.items.splice(vm.deleteIndex,1)
-	  closeModal()
-  }
+		function deleteTodo() {
+		  vm.items.splice(vm.deleteIndex,1)
+			closeModal()
+		}
 
-	function get() {
-	 console.log('test')
-	 console.log($http)
-	 $http.get('https://newsapi.org/v1/articles?source=buzzfeed&sortBy=top&apiKey=' + API_KEY).then(function (response) {
-	   vm.news = response.data.articles
-    })
-	}
+		function get() {
+		 console.log('test')
+		 console.log($http)
+		 $http.get('https://newsapi.org/v1/articles?source=buzzfeed&sortBy=top&apiKey=' + API_KEY).then(function (response) {
+			 vm.news = response.data.articles
+		  })
+		}
+
+		function openArticle (url) {
+			$window.open(url, '_blank');		
+		}
 }
 	
 })();

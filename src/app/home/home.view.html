@@ -35,14 +35,14 @@
 				<div id="news-card" class="card">
 					<div class="card-image">
 						<figure class="image is-4by3">
-							<a ng-href="{{ article.url }}">
+							<a ng-click="vm.openArticle(article.url)">
 								<img ng-src="{{ article.urlToImage }}" alt="Placeholder image">
 							</a>
 						</figure>
 					</div>
 					<div class="card-content">
 						<div class="content">
-							<a class="title is-4 is-spaced" ng-href="{{ article.url }}">{{ article.title }}</a>
+							<a class="title is-4 is-spaced" ng-click="vm.openArticle(article.url)">{{ article.title }}</a>
 							<div id="author" class="subtitle is-6"> By: {{ article.author }}</div>
 							{{ article.description }}
 							<br>
