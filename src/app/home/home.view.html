@@ -1,41 +1,87 @@
-<div class="menu">
-	<div class="menu-label">To-do List</div>
-	<ul ng-repeat="todo in vm.items track by $index">
-		<li class="menu-list">
-			<a ng-click="vm.openModal(todo, $index)">{{ todo }}</a>
-		</li>
-	</ul>
-</div>
-<div class="field">
-    <div class="control">
-		<input class="input" placeholder="Item to add" ng-model="vm.addItem" ng-keypress="vm.addTodo($event)">
-    </div>
-    
-    <div class="control">
-        <button class="button" ng-click="vm.addTodo()">Add Item</button>
-    </div>
-</div>
+<div class="columns is-marginless">
+	<div class="column is-3 right-shadow">
+		<div class="subtitle"> To-Do List </div>
+		<hr>
+		
+		<div class="menu">
+			<ul ng-repeat="todo in vm.items track by $index">
+				<li class="menu-list">
+					<a ng-click="vm.openModal(todo, $index)">{{ todo }}</a>
+				</li>
+			</ul>
+		</div>
+		
+		<div class="field">
+			<div class="control">
+				<input class="input" placeholder="Item to add" ng-model="vm.addItem" ng-keypress="vm.addTodo($event)">
+			</div>
+		
+			<div class="control">
+				<button class="button" ng-click="vm.addTodo()">Add Item</button>
+			</div>
+		</div>
 
-<div class="field">
-	<div class="control">
-		<button class="button" ng-click="vm.get()">Get</button>
+		<div class="field">
+			<div class="control">
+				<button class="button" ng-click="vm.get()">Get</button>
+			</div>
+		</div>
+	</div>
+		 
+
+	<div class="column is-9">
+		<div class="columns is-multiline" ng-if="vm.news.length > 0">
+			<div ng-repeat="article in vm.news" class="column is-3">
+				<div id="news-card" class="card">
+					<div class="card-image">
+						<figure class="image is-4by3">
+							<a ng-href="{{ article.url }}">
+								<img ng-src="{{ article.urlToImage }}" alt="Placeholder image">
+							</a>
+						</figure>
+					</div>
+					<div class="card-content">
+						<div class="content">
+							<a class="title is-4 is-spaced" ng-href="{{ article.url }}">{{ article.title }}</a>
+							<div id="author" class="subtitle is-6"> By: {{ article.author }}</div>
+							{{ article.description }}
+							<br>
+							<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
 	</div>
 </div>
 
- 
 <div class="modal" ng-class="{'is-active': vm.showModal}">
-	<div class="modal-background">	
-	</div>	
+	<div class="modal-background"></div>	
 	
 	<div class="modal-content">
-		<div class="card">
-			<div class="card-content">
+		<div class="box">
+			<div class="media-content">
 				<div class="content">
-					Do you want to remove {{ vm.deleteItem }} from the list?
-					<button class="button" ng-click="vm.deleteTodo()"> Yes </button>
-					<button class="button">	No </button>		
+					<div class="field">
+						<span class="control">
+							Do you want to remove {{ vm.deleteItem }} from the list?
+						</span>
+					</div>
+					
+					<div class="field is-grouped is-grouped-right">
+						<div class="control">
+							<button class="button" ng-click="vm.deleteTodo()"> Yes </button>
+						</div>
+						
+						<div class="control">
+							<button class="button" ng-click="vm.closeModal()">	No </button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<button class="modal-close is-large" ng-click="vm.closeModal()"></button>
 </div>
+

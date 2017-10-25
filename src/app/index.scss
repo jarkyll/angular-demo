@@ -4,10 +4,19 @@ bower.json of your dependencies */
 // endbower
 
 body {
+		height: 100%; 
     font: normal 16px/150% Arial, Helvetica, sans-serif;
 }
 
+html {
+	overflow-y: auto !important;
+	height: 100%;
+}
 
+
+#views {
+	height: inherit;
+}
 /* Do not remove the comments below. It's the markers used by gulp-inject to inject all your sass files automatically */
 // injector
 // endinjector

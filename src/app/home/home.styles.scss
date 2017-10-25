@@ -1,6 +1,6 @@
 home {
+		height: inherit;
     display: block;
-
     span {
         font-weight: bolder;
     }
@@ -8,4 +8,23 @@ home {
     button {
         font-style: italic;
     }
+	
+		.right-shadow {
+			background-color: whitesmoke;
+			box-shadow: 3px 0px 5px 6px #ccc;
+					
+		}
+		
+		.columns {
+			height: inherit; 
+		}
+
+		.column.is-9 {
+			overflow-y: auto;		
+		}
+
+		#news-card {
+			height: 100%;		
+		}
 }
+
