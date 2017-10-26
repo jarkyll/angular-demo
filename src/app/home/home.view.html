@@ -1,42 +1,37 @@
 <div class="columns is-marginless">
-	<div class="column is-3 right-shadow">
-		<div class="subtitle"> To-Do List </div>
-		<hr>
-		
-		<div class="menu">
-			<ul ng-repeat="todo in vm.items track by $index">
-				<li class="menu-list">
-					<a ng-click="vm.openModal(todo, $index)">{{ todo }}</a>
-				</li>
-			</ul>
-		</div>
-		
-		<div class="field">
-			<div class="control">
-				<input class="input" placeholder="Item to add" ng-model="vm.addItem" ng-keypress="vm.addTodo($event)">
-			</div>
-		
-			<div class="control">
-				<button class="button" ng-click="vm.addTodo()">Add Item</button>
-			</div>
-		</div>
-
-		<div class="field">
-			<div class="control">
-				<button class="button" ng-click="vm.get()">Get</button>
-			</div>
-		</div>
+	<div class="column is-3 overflow">
+		<div ng-repeat="source in vm.sources" class="box source-box is-bordered" ng-click="vm.getArticles(source.sortBysAvailable, source.id)">
+			<article class="media">
+				<div class="media-content">
+					<div class="content">
+					 {{ source.name }}
+					</div>					
+				</div>			
+			</article>
+		</div>	
 	</div>
 		 
 
-	<div class="column is-9">
+	<div class="column is-9 overflow" ng-class="{'is-loading': vm.loading}">
 		<div class="columns is-multiline" ng-if="vm.news.length > 0">
+			<div class="column is-12">
+				<div class="control">
+					<div class="select">
+						<select ng-model="vm.order">
+							<option ng-repeat="category in vm.categories" value="{{ category }}">
+								{{ category }}
+							</option>
+						</select>
+					</div>
+				</div>
+			</div>
+
 			<div ng-repeat="article in vm.news" class="column is-3">
 				<div id="news-card" class="card">
 					<div class="card-image">
-						<figure class="image is-4by3">
+						<figure class="image is-4by3 img-container">
 							<a ng-click="vm.openArticle(article.url)">
-								<img ng-src="{{ article.urlToImage }}" alt="Placeholder image">
+								<img ng-src="{{ article.urlToImage }}">
 							</a>
 						</figure>
 					</div>
@@ -53,35 +48,5 @@
 			</div>
 		</div>		
 	</div>
-</div>
-
-<div class="modal" ng-class="{'is-active': vm.showModal}">
-	<div class="modal-background"></div>	
-	
-	<div class="modal-content">
-		<div class="box">
-			<div class="media-content">
-				<div class="content">
-					<div class="field">
-						<span class="control">
-							Do you want to remove {{ vm.deleteItem }} from the list?
-						</span>
-					</div>
-					
-					<div class="field is-grouped is-grouped-right">
-						<div class="control">
-							<button class="button" ng-click="vm.deleteTodo()"> Yes </button>
-						</div>
-						
-						<div class="control">
-							<button class="button" ng-click="vm.closeModal()">	No </button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<button class="modal-close is-large" ng-click="vm.closeModal()"></button>
 </div>
 

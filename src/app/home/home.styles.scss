@@ -1,6 +1,7 @@
 home {
 		height: inherit;
     display: block;
+
     span {
         font-weight: bolder;
     }
@@ -10,21 +11,62 @@ home {
     }
 	
 		.right-shadow {
-			background-color: whitesmoke;
 			box-shadow: 3px 0px 5px 6px #ccc;
-					
 		}
 		
 		.columns {
 			height: inherit; 
 		}
 
-		.column.is-9 {
+		.overflow {
 			overflow-y: auto;		
 		}
 
 		#news-card {
 			height: 100%;		
 		}
+
+		.source-box {
+			cursor: pointer;
+			
+			&:hover {
+				background-color: #00cdcd;			
+			}
+		}
+
+		.img-container {			
+			overflow: hidden;
+			img {
+				transition: all .4s linear;
+				&:hover { 				
+					transform: scale(1.2) rotate(10deg);
+				}
+			}		
+		}
+
+		.is-loading {
+    	position: relative;
+      pointer-events: none;
+      opacity: 0.5;
+
+		  &::after {
+				content: "";
+			 	border: 4px solid gray;
+				border-top: 4px solid  #39CCCC;
+				border-radius: 50px; 
+        position: absolute;
+        top: calc(50% - 2.5em);
+        left: calc(50% - 2.5em);
+        width: 5em;
+        height: 5em;
+        border-width: 0.25em;
+				animation: spin .5s infinite;				
+
+				@keyframes spin {
+					0% { transform: rotate(0deg); }
+					100% { transform: rotate(360deg); }				
+				}
+      }
+    }
 }
 

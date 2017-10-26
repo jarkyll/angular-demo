@@ -9,6 +9,8 @@ body {
 }
 
 html {
+	user-select: none;
+	background-color: whitesmoke !important;
 	overflow-y: auto !important;
 	height: 100%;
 }
@@ -21,4 +23,10 @@ html {
 // injector
 // endinjector
 
-@import "../../node_modules/bulma/bulma.sass"
+
+@import "node_modules/bulma/sass/utilities/initial-variables";
+
+$primary: #800000;
+
+
+@import "node_modules/bulma/bulma";

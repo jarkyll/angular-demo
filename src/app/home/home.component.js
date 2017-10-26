@@ -12,63 +12,41 @@
   /** @ngInject */
   function HomeController($http, $window) {
     var vm = this;
-		vm.addItem = '';
-		vm.deleteItem = '';
-    vm.greeting = '';
-    vm.items = ['potato'];
-		vm.showModal = false;
+		vm.loading = false;
+
+
+
+		vm.order = "top";
+		vm.categories = [];
 		vm.news = [];
+		vm.sources = [];
 
 		const API_KEY = '5c0e993c6bbf489aa26a01c559defd36'
-
-    vm.alertUser = alertUser;
-    vm.addTodo = addTodo;
-		vm.openModal = openModal;
-		vm.closeModal = closeModal;
-		vm.deleteTodo = deleteTodo;
 		
-
-		vm.get = get;
+		vm.getSources = getSources;
+		vm.getArticles = getArticles;
 		vm.openArticle = openArticle;		
 
-    function alertUser() {
-      alert('This is the alert');
-    }
 
-    function addTodo(e) {
-	  	if (vm.addItem !== '' && (e == null || e.key === "Enter")) {
-			vm.items.push(vm.addItem);
-			vm.addItem = '';
-	 	 }
-    }
 
-		function openModal(item, index) {
-			vm.showModal = true;		
-			vm.deleteItem = item;
-			vm.deleteIndex = index;
-		}
-	
-		function closeModal () {
-			vm.deleteItem = null;
-			vm.deleteIndex = null;
-			vm.showModal = false;	
-		}
+		vm.getSources();
 
-		function editTodo(item, index) {
-		  vm.items[index] = item
-		}
-
-		function deleteTodo() {
-		  vm.items.splice(vm.deleteIndex,1)
-			closeModal()
-		}
-
-		function get() {
-		 console.log('test')
-		 console.log($http)
-		 $http.get('https://newsapi.org/v1/articles?source=buzzfeed&sortBy=top&apiKey=' + API_KEY).then(function (response) {
-			 vm.news = response.data.articles
+		function getArticles(categories, source) {
+		 vm.order = categories[0];
+		 vm.loading = true;
+		 vm.categories = categories;
+		 $http.get('https://newsapi.org/v1/articles?source=' + source + '&sortBy=top&apiKey=' + API_KEY).then(function (response) {
+				vm.loading = false;			 
+				vm.news = response.data.articles
 		  })
+		}
+
+		function getSources() {
+			console.log('getting sources');
+			$http.get('https://newsapi.org/v1/sources').then(function (response) {
+				console.log(response);
+				vm.sources = response.data.sources;
+			})
 		}
 
 		function openArticle (url) {
