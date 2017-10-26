@@ -17,7 +17,9 @@
 
 		vm.currentSource = "";
 		vm.order = "top";
-		vm.categories = [];
+		vm.orderList = [];
+		vm.category = 'general';
+		vm.categories = ['business', 'entertainment', 'gaming', 'general', 'music', 'politics', 'science-and-nature', 'sport', 'technology']
 		vm.news = [];
 		vm.sources = [];
 
@@ -31,11 +33,11 @@
 
 		vm.getSources();
 
-		function getArticles(source, order, categories) {
+		function getArticles(source, order, orderList) {
 		 
-		 if (categories != null) {
-		 	vm.order = categories[0];
-			vm.categories = categories;
+		 if (orderList != null) {
+		 	vm.order = orderList[0];
+			vm.orderList = orderList;
 		 }
 		
 		 vm.loading = true;
@@ -51,8 +53,18 @@
 		}
 
 		function getSources() {
+			var temp = {};
 			$http.get('https://newsapi.org/v1/sources').then(function (response) {
 				vm.sources = response.data.sources;
+				vm.sources.forEach(function (value, index) {
+					var cat = value.category;
+					if (!(cat in temp)) {
+						temp[cat] = 1;
+					} else {
+						temp[cat] += 1;					
+					}				
+				})
+				console.log(temp)
 			})
 		}
 

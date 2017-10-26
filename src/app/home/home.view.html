@@ -15,19 +15,33 @@
 	<div class="column is-9 overflow" ng-class="{'is-loading': vm.loading}">
 		<div class="columns is-multiline" ng-if="vm.news.length > 0">
 			<div class="column is-12">
-				<div class="control">
-					<div class="select">
-						<select ng-model="vm.order">
-							<option ng-repeat="category in vm.categories" value="{{ category }}">
-								{{ category }}
-							</option>
-						</select>
+				<div class="field is-grouped">
+					<div class="control">
+						<div class="select">
+							<select ng-model="vm.order">
+								<option ng-repeat="order in vm.orderList" value="{{ order }}">
+									{{ order }}
+								</option>
+							</select>
+						</div>
+					</div>
+				
+					<div class="control">
+						<div class="select">
+							<select ng-model="vm.category">
+								<option ng-repeat="category in vm.categories" value="{{ category }}">
+									{{ category }}								
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="control">
+						<button class="button" ng-click="vm.getArticles(vm.currentSource, vm.order)">
+							Fetch
+						</button>
 					</div>
 				</div>
-
-				<button class="button" ng-click="vm.getArticles(vm.currentSource, vm.order)">
-					Fetch
-				</button>
 			</div>
 
 			<div ng-repeat="article in vm.news" class="column is-3">
