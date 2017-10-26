@@ -1,14 +1,6 @@
 home {
 		height: inherit;
     display: block;
-
-    span {
-        font-weight: bolder;
-    }
-
-    button {
-        font-style: italic;
-    }
 	
 		.right-shadow {
 			box-shadow: 3px 0px 5px 6px #ccc;
@@ -24,6 +16,24 @@ home {
 
 		#news-card {
 			height: 100%;		
+
+			.img-container {			
+				overflow: hidden;
+				img {
+					transition: all .4s linear;
+					&:hover { 				
+						transform: scale(1.2) rotate(10deg);
+					}
+				}		
+			}
+
+			#title:hover {
+				color: gray;
+			}
+
+			time {
+				color: black;			
+			}
 		}
 
 		.source-box {
@@ -34,15 +44,6 @@ home {
 			}
 		}
 
-		.img-container {			
-			overflow: hidden;
-			img {
-				transition: all .4s linear;
-				&:hover { 				
-					transform: scale(1.2) rotate(10deg);
-				}
-			}		
-		}
 
 		.is-loading {
     	position: relative;

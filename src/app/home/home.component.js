@@ -38,13 +38,16 @@
 		 $http.get('https://newsapi.org/v1/articles?source=' + source + '&sortBy=top&apiKey=' + API_KEY).then(function (response) {
 				vm.loading = false;			 
 				vm.news = response.data.articles
+				vm.news.forEach(function (value, index) { 
+					console.log(value, index)
+					var date = new Date(value.publishedAt);
+					value.publishedAt = date.toDateString();				
+				})
 		  })
 		}
 
 		function getSources() {
-			console.log('getting sources');
 			$http.get('https://newsapi.org/v1/sources').then(function (response) {
-				console.log(response);
 				vm.sources = response.data.sources;
 			})
 		}

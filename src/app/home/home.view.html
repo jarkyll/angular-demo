@@ -37,11 +37,11 @@
 					</div>
 					<div class="card-content">
 						<div class="content">
-							<a class="title is-4 is-spaced" ng-click="vm.openArticle(article.url)">{{ article.title }}</a>
+							<a id="title" class="title is-4 is-spaced" ng-click="vm.openArticle(article.url)">{{ article.title }}</a>
 							<div id="author" class="subtitle is-6"> By: {{ article.author }}</div>
-							{{ article.description }}
-							<br>
-							<time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+							
+							<div class="is-spaced"> {{ article.description }} </div>
+							<time datetime="2016-1-1">{{ article.publishedAt }}</time>
 						</div>
 					</div>
 				</div>
