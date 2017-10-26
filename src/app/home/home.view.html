@@ -1,6 +1,6 @@
 <div class="columns is-marginless">
 	<div class="column is-3 overflow">
-		<div ng-repeat="source in vm.sources" class="box source-box is-bordered" ng-click="vm.getArticles(source.sortBysAvailable, source.id)">
+		<div ng-repeat="source in vm.sources" class="box source-box is-bordered" ng-click="vm.getArticles(source.id, vm.order, source.sortBysAvailable)">
 			<article class="media">
 				<div class="media-content">
 					<div class="content">
@@ -24,6 +24,10 @@
 						</select>
 					</div>
 				</div>
+
+				<button class="button" ng-click="vm.getArticles(vm.currentSource, vm.order)">
+					Fetch
+				</button>
 			</div>
 
 			<div ng-repeat="article in vm.news" class="column is-3">
